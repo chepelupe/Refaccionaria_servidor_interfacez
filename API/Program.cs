@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,8 +14,19 @@ sqlServerOptionsAction: sqlOptions =>
 }));
 
 // Add services to the container.
-
 builder.Services.AddControllers();
+
+//Configuración de CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("PermitirDesarrolloWeb", policy =>
+    {
+        policy.AllowAnyOrigin()    // Permite que se conecte el React/Angular/HTML de tu compañero
+              .AllowAnyHeader()    // Permite que envíe JSON
+              .AllowAnyMethod();   // Permite GET, POST, PUT, DELETE
+    });
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -30,8 +42,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+// ¡AQUÍ ESTÁ EL CAMBIO! CORS debe ir ANTES de la autorización.
+app.UseCors("PermitirDesarrolloWeb");
+
 app.UseAuthorization();
 
 app.MapControllers();
 
+// Solo un Run() al final para arrancar el servidor.
 app.Run();
