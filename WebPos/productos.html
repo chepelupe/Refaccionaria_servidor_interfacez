@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos - POS Bicicletas</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>🚲 POS</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="dashboard.html">📊 Dashboard</a></li>
+                <li><a href="ventas.html">🛒 Ventas</a></li>
+                <li><a href="productos.html" class="active">📦 Productos</a></li>
+                <li><a href="#" id="logoutBtn">🚪 Cerrar Sesión</a></li>
+            </ul>
+            <div class="user-info">
+                <p>Bienvenido, <span id="userName"></span></p>
+            </div>
+        </nav>
+        <main class="main-content">
+            <header class="top-bar">
+                <h1>Gestión de Productos</h1>
+                <button id="btnNuevoProducto" class="btn-secondary">+ Nuevo Producto</button>
+            </header>
+
+            <div class="filtros-section">
+                <input type="text" id="filtroProducto" placeholder="Buscar producto...">
+                <select id="filtroMarca">
+                    <option value="">Todas las marcas</option>
+                </select>
+            </div>
+
+            <div class="productos-table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Marca</th>
+                            <th>Precio Venta</th>
+                            <th>Stock</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productosTable">
+                        <tr><td colspan="6">Cargando...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal para nuevo/editar producto -->
+    <div id="productoModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalTitle">Nuevo Producto</h2>
+            <form id="productoForm">
+                <input type="hidden" id="productoId">
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input type="text" id="prodNombre" required>
+                </div>
+                <div class="form-group">
+                    <label>Marca</label>
+                    <select id="prodMarca" required></select>
+                </div>
+                <div class="form-group">
+                    <label>Tipo de Producto</label>
+                    <select id="prodTipo"></select>
+                </div>
+                <div class="form-group">
+                    <label>Precio Compra</label>
+                    <input type="number" id="prodPrecioCompra" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label>Precio Venta</label>
+                    <input type="number" id="prodPrecioVenta" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label>Stock Actual</label>
+                    <input type="number" id="prodStockActual" required>
+                </div>
+                <div class="form-group">
+                    <label>Stock Mínimo</label>
+                    <input type="number" id="prodStockMinimo">
+                </div>
+                <div class="form-group">
+                    <label>Modelo</label>
+                    <input type="text" id="prodModelo">
+                </div>
+                <div class="form-group">
+                    <label>Código de Barras</label>
+                    <input type="text" id="prodCodigoBarras">
+                </div>
+                <button type="submit" class="btn-primary">Guardar</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/productos.js"></script>
+</body>
+</html>

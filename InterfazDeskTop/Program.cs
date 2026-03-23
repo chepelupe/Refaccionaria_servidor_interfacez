@@ -16,7 +16,9 @@ namespace InterfazDeskTop
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmVentas());
+            
+            // Iniciar con el formulario de login
+            Application.Run(new FrmLogin());
         }
     }
 }
